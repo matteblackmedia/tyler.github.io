@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tyler Pyunti — High Ticket Sales Mentorship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080810;
+    --surface: #0e0e18;
+    --border: #1c1c2e;
+    --blue1: #4fc3f7;
+    --blue2: #818cf8;
+    --blue3: #38bdf8;
+    --grad: linear-gradient(110deg, #38bdf8 0%, #818cf8 60%, #c084fc 100%);
+    --grad-soft: linear-gradient(110deg, rgba(56,189,248,0.15) 0%, rgba(129,140,248,0.15) 100%);
+    --text: #eeeef5;
+    --muted: #6b6b8a;
+    --danger: #f87171;
+    --btn-bg: linear-gradient(110deg, #38bdf8 0%, #818cf8 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, rgba(56,189,248,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 900;
+    background: rgba(8,8,16,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 44px; height: 58px;
+  }
+
+  .logo {
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .nav-cta {
+    background: var(--btn-bg);
+    color: #fff; font-family: 'Sora', sans-serif;
+    font-weight: 600; font-size: 0.7rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 9px 22px; border: none; cursor: pointer;
+    text-decoration: none; border-radius: 3px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ── BANNER ── */
+  .banner {
+    background: rgba(56,189,248,0.05);
+    border-bottom: 1px solid rgba(56,189,248,0.1);
+    text-align: center; padding: 10px 20px;
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--blue1);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .banner-dot {
+    width: 7px; height: 7px;
+    background: var(--danger); border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.65); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 76px 20px 48px;
+    text-align: center;
+    max-width: 820px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(56,189,248,0.07);
+    border: 1px solid rgba(56,189,248,0.18);
+    color: var(--blue1);
+    font-size: 0.67rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 5px 14px; margin-bottom: 32px; border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+    font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  /* shimmering blue gradient text */
+  .shimmer {
+    background: linear-gradient(
+      110deg,
+      #38bdf8 0%,
+      #818cf8 30%,
+      #c084fc 50%,
+      #818cf8 70%,
+      #38bdf8 100%
+    );
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 250% center; }
+  }
+
+  .hero-sub {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    color: var(--muted); margin-bottom: 16px; line-height: 1.6;
+  }
+  .hero-sub strong { color: var(--text); font-style: normal; font-family: 'Sora', sans-serif; font-weight: 600; }
+
+  .stat-row {
+    display: flex; justify-content: center;
+    gap: 36px; margin: 32px 0; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 2.1rem; font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.64rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin-top: 5px;
+  }
+  .divider-line { width: 1px; background: var(--border); height: 44px; align-self: center; }
+
+  /* ── BUTTONS ── */
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--btn-bg); color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 15px 38px; border: none; cursor: pointer;
+    text-decoration: none; border-radius: 3px; position: relative; overflow: hidden;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(56,189,248,0.22); }
+  .cta-btn svg { flex-shrink: 0; }
+
+  .cta-wrap {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 11px; margin: 32px 0;
+  }
+  .cta-note { font-size: 0.67rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  .scroll-arrow {
+    display: flex; justify-content: center;
+    margin: 10px 0 36px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(7px); }
+  }
+
+  /* ── VSL ── */
+  .vsl-section {
+    max-width: 820px; margin: 0 auto;
+    padding: 0 20px 64px; position: relative; z-index: 1;
+  }
+  .vsl-label {
+    text-align: center; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .vsl-container {
+    position: relative; border: 1px solid var(--border);
+    background: #000; aspect-ratio: 16/9; overflow: hidden;
+    border-radius: 4px; box-shadow: 0 0 60px rgba(56,189,248,0.06);
+  }
+  .vsl-container::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border: 1px solid rgba(56,189,248,0.12);
+    pointer-events: none; z-index: 2; border-radius: 4px;
+  }
+  .vsl-container iframe { width: 100%; height: 100%; border: none; display: block; }
+  .vsl-caption {
+    text-align: center; margin-top: 12px;
+    font-size: 0.72rem; color: var(--muted); font-style: italic;
+  }
+
+  /* first apply button (below VSL) */
+  .vsl-cta {
+    margin-top: 38px;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-label {
+    font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 20px; display: inline-block;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section {
+    padding: 72px 20px;
+    max-width: 980px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .testi-header { text-align: center; margin-bottom: 44px; }
+  .testi-header h2 {
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  }
+  .testi-header p { color: var(--muted); font-size: 0.88rem; margin-top: 10px; }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 14px;
+  }
+
+  .testi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 26px 22px; border-radius: 6px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .testi-card:hover { border-color: rgba(56,189,248,0.2); transform: translateY(-2px); }
+
+  .testi-card-header {
+    display: flex; align-items: center; gap: 11px; margin-bottom: 14px;
+  }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #1a1a2e; border: 1px solid var(--border); overflow: hidden; flex-shrink: 0;
+  }
+  .testi-name { font-weight: 600; font-size: 0.86rem; color: var(--text); }
+  .testi-handle { font-size: 0.7rem; color: var(--muted); }
+  .testi-badge {
+    margin-left: auto; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(56,189,248,0.08); color: var(--blue1);
+    padding: 3px 8px; border: 1px solid rgba(56,189,248,0.18); white-space: nowrap; border-radius: 2px;
+  }
+  .testi-body { font-size: 0.86rem; color: #9898b8; line-height: 1.72; margin-bottom: 14px; }
+  .testi-result {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 700; font-size: 1rem;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .testi-screenshot {
+    background: #0a0a14; border: 1px solid var(--border);
+    padding: 22px; border-radius: 6px;
+    grid-column: span 2;
+  }
+  @media (max-width: 640px) { .testi-screenshot { grid-column: span 1; } }
+
+  .screenshot-label {
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .mock-chat {
+    background: #0e0e1c; border-radius: 4px; padding: 16px;
+    font-size: 0.82rem; color: #9898b8; line-height: 1.7;
+    border: 1px solid var(--border);
+  }
+  .mock-chat .user { color: var(--blue1); font-weight: 600; }
+  .mock-chat .amount {
+    font-weight: 700; font-size: 1.1rem;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .mock-chat .msg { margin: 3px 0 11px 0; }
+
+  /* ── OFFER ── */
+  .offer-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 72px 20px; position: relative; z-index: 1;
+  }
+  .offer-inner { max-width: 860px; margin: 0 auto; }
+  .offer-inner h2 {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 10px;
+  }
+  .offer-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 44px; max-width: 520px; }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .offer-card {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 28px 24px; border-radius: 6px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .offer-card:hover { border-color: rgba(129,140,248,0.25); transform: translateY(-2px); }
+  .offer-icon { width: 32px; height: 32px; margin-bottom: 16px; color: var(--blue1); }
+  .offer-card h3 {
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 9px; color: var(--text); letter-spacing: -0.01em;
+  }
+  .offer-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.72; }
+
+  /* ── WHO IT'S FOR ── */
+  .for-section {
+    padding: 72px 20px; position: relative; z-index: 1;
+  }
+  .for-inner {
+    max-width: 760px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 50px;
+  }
+  @media (max-width: 640px) {
+    .for-inner { grid-template-columns: 1fr; gap: 36px; }
+    .for-divider { display: none; }
+  }
+  .for-divider { background: var(--border); }
+  .for-col h3 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.01em; }
+  .for-col.yes h3 { color: var(--blue1); }
+  .for-col.no h3 { color: var(--danger); }
+  .for-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .for-list li {
+    display: flex; align-items: flex-start; gap: 9px;
+    font-size: 0.88rem; color: #9898b8; line-height: 1.5;
+  }
+  .for-list li svg { flex-shrink: 0; margin-top: 3px; }
+
+  /* ── FINAL CTA ── */
+  .final-section {
+    padding: 96px 20px; text-align: center;
+    max-width: 680px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .final-section h2 {
+    font-size: clamp(2rem, 5.5vw, 3.8rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  .final-section p {
+    color: var(--muted); font-size: 0.96rem;
+    max-width: 480px; margin: 0 auto 36px; line-height: 1.78;
+  }
+  .final-section p strong { color: var(--text); }
+  .final-note {
+    margin-top: 22px; font-size: 0.68rem; color: var(--muted);
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap;
+  }
+  .final-note span { padding: 0 14px; }
+  .final-note span + span { border-left: 1px solid var(--border); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 26px 44px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .footer-logo {
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .footer-copy { font-size: 0.68rem; color: var(--muted); }
+
+  /* ── FADE IN ── */
+  .fade-up { opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.34s; }
+  .d4 { animation-delay: 0.48s; }
+  .d5 { animation-delay: 0.62s; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.82); backdrop-filter: blur(10px);
+    z-index: 9999; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface); border: 1px solid var(--border);
+    max-width: 470px; width: 100%;
+    padding: 46px 38px; position: relative; border-radius: 8px;
+    animation: fadeUp 0.28s ease forwards;
+    box-shadow: 0 0 80px rgba(56,189,248,0.07);
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none; color: var(--muted);
+    font-size: 1.4rem; cursor: pointer; line-height: 1; transition: color 0.15s;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal h3 {
+    font-size: 1.7rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 5px;
+  }
+  .modal-sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 0.64rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text); font-family: 'Sora', sans-serif;
+    font-size: 0.88rem; padding: 11px 13px;
+    outline: none; transition: border-color 0.2s;
+    border-radius: 4px; appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: rgba(56,189,248,0.4); }
+  .form-group textarea { resize: vertical; min-height: 78px; }
+
+  .form-submit {
+    width: 100%; background: var(--btn-bg);
+    color: #fff; font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 14px; border: none; cursor: pointer;
+    margin-top: 6px; border-radius: 4px; transition: opacity 0.2s;
+  }
+  .form-submit:hover { opacity: 0.88; }
+  .form-disclaimer { font-size: 0.66rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    footer { padding: 22px 20px; }
+    .modal { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">Tyler Pyunti</span>
+  <a href="#" class="nav-cta" onclick="openModal(event)">Apply Now</a>
+</nav>
+
+<!-- BANNER -->
+<div class="banner">
+  <span class="banner-dot"></span>
+  Spots are limited — This page may come down without notice
+</div>
+
+  <h1 class="fade-up d2">
+    From <span class="shimmer">4AM Construction</span><br>to<br><span class="shimmer">30k+ months</span>
+  </h1>
+
+  <p class="hero-sub fade-up d3">
+    A <strong>20-year-old who walked away from $1,100/week</strong><br>to put everything into HTS, and hasn't looked back.
+  </p>
+
+  <div class="stat-row fade-up d4">
+    <div class="stat">
+      <div class="stat-num">$1,500+</div>
+      <div class="stat-label">Days Committed</div>
+    </div>
+    <div class="divider-line"></div>
+    <div class="stat">
+      <div class="stat-num">20</div>
+      <div class="stat-label">Years Old</div>
+    </div>
+    <div class="divider-line"></div>
+    <div class="stat">
+      <div class="stat-num">9</div>
+      <div class="stat-label">months</div>
+    </div>
+  </div>
+
+  <div class="scroll-arrow fade-up d5">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 4v12M4 12l6 6 6-6" stroke="#2a2a44" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- VSL + FIRST CTA BUTTON -->
+<section class="vsl-section">
+  <div class="vsl-label">Watch This First</div>
+  <div class="vsl-container">
+    <!-- Replace VIDEO_ID with your unlisted YouTube video ID -->
+    <iframe
+      src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&color=white"
+      title="Tyler Pyunti — Sales Mentorship"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <p class="vsl-caption">Watch before applying: it'll answer most of your questions.</p>
+
+  <div class="cta-wrap vsl-cta">
+    <a href="#" class="cta-btn" onclick="openModal(event)">
+      Apply for Mentorship
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <span class="cta-note">Free to apply · Tyler reviews every one personally</span>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="testi-header">
+    <div class="section-label">Results</div>
+    <h2>People Who <span class="shimmer">Actually Did It</span></h2>
+    <p>Real wins from people who stopped overthinking.</p>
+  </div>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-card-header">
+        <div class="testi-avatar">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect width="40" height="40" rx="20" fill="#131325"/>
+            <circle cx="20" cy="15" r="6" fill="#252540"/>
+            <ellipse cx="20" cy="32" rx="11" ry="6" fill="#252540"/>
+          </svg>
+        </div>
+        <div><div class="testi-name">Marcus D.</div><div class="testi-handle">Former warehouse worker</div></div>
+        <span class="testi-badge">Verified</span>
+      </div>
+      <p class="testi-body">Was making $900/week stacking shelves at 3AM. Spent a month in the program and closed my first $3k deal on week 5. Now I'm averaging 2–3 closes a week. This stuff is real.</p>
+      <div class="testi-result">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        $3,000 first close
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-card-header">
+        <div class="testi-avatar">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect width="40" height="40" rx="20" fill="#131325"/>
+            <circle cx="20" cy="15" r="6" fill="#1e2a3a"/>
+            <ellipse cx="20" cy="32" rx="11" ry="6" fill="#1e2a3a"/>
+          </svg>
+        </div>
+        <div><div class="testi-name">Jordan K.</div><div class="testi-handle">Dropped out → sales</div></div>
+        <span class="testi-badge">Verified</span>
+      </div>
+      <p class="testi-body">Dropped out of college with no plan. Found Tyler and applied same day. 6 weeks later I had my first 5-figure month. He actually picks up when you call.</p>
+      <div class="testi-result">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        $11,200 Month 2
+      </div>
+    </div>
+
+    <div class="testi-screenshot">
+      <div class="screenshot-label">Payment Notification · Sample</div>
+      <div class="mock-chat">
+        <div><span class="user">🔔 Stripe</span></div>
+        <div class="msg">You received a payment of <span class="amount">$4,500</span></div>
+        <div><span class="user">Tyler:</span></div>
+        <div class="msg">That's your second one this week. Keep the same energy on Monday. You're figuring it out.</div>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid #1c1c2e;">
+          <span class="user">Ryan S.</span> — Student, week 7<br>
+          <span style="color:#6b6b8a; font-size:0.79rem;">"I never believed anyone could teach this until Tyler did it live on a call with me watching."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-card-header">
+        <div class="testi-avatar">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect width="40" height="40" rx="20" fill="#131325"/>
+            <circle cx="20" cy="15" r="6" fill="#201e2e"/>
+            <ellipse cx="20" cy="32" rx="11" ry="6" fill="#201e2e"/>
+          </svg>
+        </div>
+        <div><div class="testi-name">Aiden M.</div><div class="testi-handle">Restaurant → remote</div></div>
+        <span class="testi-badge">Verified</span>
+      </div>
+      <p class="testi-body">Was making $14/hr at a restaurant. Didn't think I had the "personality" for sales. Tyler broke that belief in week one. Month 3 and I haven't worked a weekend since.</p>
+      <div class="testi-result">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        $7,800 Month 3
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-card-header">
+        <div class="testi-avatar">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect width="40" height="40" rx="20" fill="#131325"/>
+            <circle cx="20" cy="15" r="6" fill="#1a2020"/>
+            <ellipse cx="20" cy="32" rx="11" ry="6" fill="#1a2020"/>
+          </svg>
+        </div>
+        <div><div class="testi-name">Priya L.</div><div class="testi-handle">Corporate → commission</div></div>
+        <span class="testi-badge">Verified</span>
+      </div>
+      <p class="testi-body">Stuck in a dead-end corporate job. Tyler's straightforward — no fake hype, no motivational nonsense. Just actual process. I closed a $6k deal on my 4th call ever.</p>
+      <div class="testi-result">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        $6,000 on call #4
+      </div>
+    </div>
+  </div>
+
+  <!-- Second CTA after testimonials -->
+  <div class="cta-wrap" style="margin-top: 50px;">
+    <a href="#" class="cta-btn" onclick="openModal(event)">
+      I'm Ready — Apply Now
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <span class="cta-note">Takes 2 minutes · No pressure · Real conversation</span>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer-section">
+  <div class="offer-inner">
+    <div class="section-label">What's Inside</div>
+    <h2>Everything You Need to<br><span class="shimmer">Close Your First High Ticket Deal</span></h2>
+    <p class="offer-sub">No fluff. No 200-video course you'll never finish. Direct access to someone doing it right now.</p>
+
+    <div class="offer-grid">
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="5" width="24" height="22" rx="2" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 12h12M10 17h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Sales Script & Framework</h3>
+        <p>The exact call structure Tyler uses to move prospects from curious to committed — built from real reps, not theory.</p>
+      </div>
+
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M16 9v7l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Live Call Reviews</h3>
+        <p>Submit your recorded calls. Tyler listens and tells you exactly where you lost them and how to fix it.</p>
+      </div>
+
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <path d="M16 4L4 11v10l12 7 12-7V11L16 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M16 4v18M4 11l12 7 12-7" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <h3>Objection Playbook</h3>
+        <p>Word-for-word responses to the most common objections. Price, timing, "I need to think about it" — handled.</p>
+      </div>
+
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <path d="M6 16a10 10 0 1 0 20 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M22 6l5 10H17L22 6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <h3>Mindset & Discipline</h3>
+        <p>Sales is a head game as much as a skill. Tyler doesn't sugarcoat what it takes to show up every single day.</p>
+      </div>
+
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <path d="M6 24l4-7 5 4 4-9 5 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 7h24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Setter to Closer Path</h3>
+        <p>Whether you're starting from zero or already setting, Tyler maps your next 90 days based on where you actually are.</p>
+      </div>
+
+      <div class="offer-card">
+        <svg class="offer-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M11 16a5 5 0 0 0 10 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M13 12h.01M19 12h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3>Direct Access to Tyler</h3>
+        <p>This isn't a community where you get lost. You get Tyler. Questions answered. Accountability that actually holds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="for-section">
+  <div class="for-inner">
+    <div class="for-col yes">
+      <h3>✓ This Is You</h3>
+      <ul class="for-list">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#4fc3f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Tired of trading time for a wage that doesn't grow</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#4fc3f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to learn, take feedback, and actually do the reps</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#4fc3f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Want a mentor who's in it — not someone selling a lifestyle</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#4fc3f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Understand that real results come from real work</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="#4fc3f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Can commit fully — not "when I have time"</li>
+      </ul>
+    </div>
+    <div class="for-divider"></div>
+    <div class="for-col no">
+      <h3>✗ Not For You</h3>
+      <ul class="for-list">
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/></svg>You want a shortcut with zero effort</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/></svg>You're going to ghost after week one</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/></svg>You expect money before putting in the calls</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/></svg>You can't handle honest feedback on your recordings</li>
+        <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/></svg>You're here to collect content and never execute</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-section">
+  <div class="section-label">Ready?</div>
+  <h2>Stop Watching.<br>Start <span class="shimmer">Closing.</span></h2>
+  <p>Tyler reviews every application himself. If it's a fit, you'll hear back directly. <strong>No sales team. No runaround.</strong> Just a real conversation.</p>
+
+  <div class="cta-wrap">
+    <a href="#" class="cta-btn" onclick="openModal(event)" style="padding: 17px 48px; font-size: 0.78rem;">
+      Submit Your Application
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <div class="final-note">
+    <span>Free to apply</span>
+    <span>Limited spots</span>
+    <span>Tyler personally reviews</span>
+    <span>No spam, ever</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Tyler Pyunti</span>
+  <span class="footer-copy">© 2025 Tyler Pyunti · tyla-closingtyler · All rights reserved</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Apply for Mentorship</h3>
+    <p class="modal-sub">Tyler reviews every application personally. Be honest — that's what gets a yes.</p>
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" placeholder="Your name" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="you@email.com" />
+    </div>
+    <div class="form-group">
+      <label>Instagram / TikTok Handle</label>
+      <input type="text" placeholder="@yourhandle" />
+    </div>
+    <div class="form-group">
+      <label>Current Situation</label>
+      <select>
+        <option value="" disabled selected>Where are you at right now?</option>
+        <option>Working a 9-5 / trade job</option>
+        <option>Student</option>
+        <option>Already doing some online income</option>
+        <option>Unemployed / looking for direction</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Why do you want this? (Be real.)</label>
+      <textarea placeholder="What's driving you? What are you running from or running toward?"></textarea>
+    </div>
+
+    <button class="form-submit">Send My Application →</button>
+    <p class="form-disclaimer">No spam. No automated replies. Tyler reads these himself.</p>
+  </div>
+</div>
+
+<script>
+  function openModal(e) {
+    e.preventDefault();
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Scroll fade-ins
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.offer-card, .testi-card, .testi-screenshot, .for-col, .vsl-section').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
